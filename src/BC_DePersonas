@@ -1,0 +1,85 @@
+
+%Personas.-
+mujer(nataly).
+mujer(karla).
+mujer(ivonne).
+mujer(tere).
+mujer(maria).
+mujer(fernanda).
+mujer(liz).
+mujer(alondra).
+mujer(lizbeth).
+mujer(brenda).
+
+hombre(miguel). 
+hombre(eduardo). adulto(eduardo).
+hombre(carlos).
+hombre(salvador).
+hombre(ivan).
+hombre(alex). ninio(alex).
+hombre(albar).
+hombre(enrrique).
+hombre(fernando).
+hombre(alejandro).
+
+%Parejas.-
+esposa(ivonne, carlos).
+esposa(nataly, miguel).
+esposa(karla, eduardo).
+
+esposo(carlos, ivonne).
+esposo(miguel, nataly).
+esposo(eduardo, karla).
+
+hijo(alex, nataly).
+hijo(alex, miguel).
+hijo(enrrique, albar).
+
+hija(lizbeth, nataly).
+hija(lizbeth, miguel).
+hija(nataly, ivonne).
+hija(nataly, carlos).
+hija(karla, ivonne).
+hija(karla, carlos).
+
+%REGLAS
+padre(X,Y) :- hombre(X), hijo(Y, X); hija(Y, X).
+
+madre(X,Y) :- mujer(X), hijo(Y, X); hija(Y, X).
+
+%Reglas de tarea
+
+abuela(X) :- mujer(X), (hija(Z,Y); hijo(Z,Y)), (hija(Y,X); hijo(Y,X)).
+
+abuelo(X) :- hombre(X), (hija(Z,Y); hijo(Z,Y)), (hija(Y,X); hijo(Y,X)).
+
+persona(X) :- hombre(X); mujer(X).
+
+nieto(X) :- hijo(X, Y), (hijo(Y, Z); hija(Y, Z)).
+
+nieta(X) :- hija(X, Y), (hijo(Y, Z); hija(Y, Z)).
+
+hermanos(X,Y) :- (hijo(X,Z); hija(X,Z)), hijo(Y,Z).
+
+hermanas(X,Y) :- (hijo(X,Z); hija(X,Z)), hija(Y,Z).
+
+parejas(X,Y) :- esposo(X,Y); esposa(Y,X).
+
+
+%PRUEBAS
+
+%abuela(ivonne).
+
+%abuelo(carlos).
+
+%persona(ivan).
+
+%nieto(alex).
+
+%nieta(lizbeth).
+
+%hermanos(lizbeth,alex).
+
+%hermanas(alex,lizbeth).
+
+%pareja(nataly,miguel).
